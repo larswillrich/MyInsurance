@@ -1,17 +1,24 @@
+
 terraform {
-  backend "s3" {
-    bucket         = "terraform-state-lars-willrich"
-    key            = "larswillrich/myInsuranceExample/damagecase/myinsurance-prod/terraform.tfstate"
-    region         = "eu-central-1"
-    dynamodb_table = "terraform-state-locks"
-    encrypt        = true
+  backend "s3" {}
+}
+
+terraform {
+  extra_arguments "common_vars" {
+    commands = ["plan", "apply", "destroy"]
+
+    arguments = [
+      "-var-file=./variable.tfvars",
+      "-var-file=../organizationUnit.tfvars",
+      "-var-file=../../organization.tfvars"
+    ]
   }
 }
 
 module "s3-bucket" {
   source              = "github.com/larswillrich/terraforf-modules-example//s3-bucket"
-  organization        = "myinsurance"
-  organizationUnit    = "damagecase"
-  account             = "myinsurance-dev"
-  stage               = "prod"
+  organization        = var.organization
+  organizationUnit    = var.organizationUnit
+  account             = "${var.organizationUnit}-${var.stage}"
+  stage               = var.stage
 }
