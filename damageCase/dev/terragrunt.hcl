@@ -9,7 +9,7 @@ terraform {
     commands = ["plan", "apply", "destroy"]
 
     arguments = [
-      "-var-file=${get_terragrunt_dir()}/./variable.hcl",
+      "-var-file=${get_terragrunt_dir()}/./vars.hcl",
       "-var-file=${get_terragrunt_dir()}/../organizationUnit.hcl",
       "-var-file=${get_terragrunt_dir()}/../../organization.hcl"
     ]
@@ -17,4 +17,3 @@ terraform {
   
   source = "github.com/larswillrich/terraforf-modules-example//s3-bucket"
 }
-

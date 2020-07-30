@@ -1,4 +1,5 @@
-lines (27 sloc)  862 Bytes
+
+.DS_Store
   
 # Local .terraform directories
 **/.terraform/*
