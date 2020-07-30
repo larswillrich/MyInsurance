@@ -9,11 +9,12 @@ terraform {
     commands = ["plan", "apply", "destroy"]
 
     arguments = [
-      "-var-file=${get_terragrunt_dir()}/./variable.tfvars",
-      "-var-file=${get_terragrunt_dir()}/../organizationUnit.tfvars",
-      "-var-file=${get_terragrunt_dir()}/../../organization.tfvars"
+      "-var-file=${get_terragrunt_dir()}/./variable.hcl",
+      "-var-file=${get_terragrunt_dir()}/../organizationUnit.hcl",
+      "-var-file=${get_terragrunt_dir()}/../../organization.hcl"
     ]
   }
   
   source = "github.com/larswillrich/terraforf-modules-example//s3-bucket"
 }
+
